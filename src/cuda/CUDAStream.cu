@@ -19,7 +19,7 @@ void check_error(void)
 }
 
 template <class T>
-CUDAStream<T>::CUDAStream(const int ARRAY_SIZE, const int device_index)
+CUDAStream<T>::CUDAStream(const size_t ARRAY_SIZE, const int device_index)
 {
 
   // The array size must be divisible by TBSIZE for kernel launches

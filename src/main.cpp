@@ -52,7 +52,7 @@
 #endif
 
 // Default size of 2^25
-int ARRAY_SIZE = 33554432;
+size_t ARRAY_SIZE = 33554432;
 unsigned int num_times = 100;
 unsigned int deviceIndex = 0;
 bool use_float = true;
@@ -533,6 +533,12 @@ int parseInt(const char *str, int *output)
   return !strlen(next);
 }
 
+size_t parseSizeT(const char *str, size_t *output) {
+  char *next;
+  *output = strtoul(str, &next, 10);
+  return !strlen(next);
+}
+
 void parseArguments(int argc, char *argv[])
 {
   for (int i = 1; i < argc; i++)
@@ -553,7 +559,7 @@ void parseArguments(int argc, char *argv[])
     else if (!std::string("--arraysize").compare(argv[i]) ||
              !std::string("-s").compare(argv[i]))
     {
-      if (++i >= argc || !parseInt(argv[i], &ARRAY_SIZE) || ARRAY_SIZE <= 0)
+      if (++i >= argc || !parseSizeT(argv[i], &ARRAY_SIZE) || ARRAY_SIZE <= 0)
       {
         std::cerr << "Invalid array size." << std::endl;
         exit(EXIT_FAILURE);
