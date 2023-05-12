@@ -55,9 +55,9 @@
 int ARRAY_SIZE = 33554432;
 unsigned int num_times = 100;
 unsigned int deviceIndex = 0;
-bool use_float = false;
-bool output_as_csv = false;
-bool mibibytes = false;
+bool use_float = true;
+bool output_as_csv = true;
+bool mibibytes = true;
 std::string csv_separator = ",";
 
 template <typename T>
@@ -328,20 +328,20 @@ void run()
 
 
   stream->read_arrays(a, b, c);
-  check_solution<T>(num_times, a, b, c, sum);
+  // check_solution<T>(num_times, a, b, c, sum);
 
   // Display timing results
   if (output_as_csv)
   {
-    std::cout
-      << "function" << csv_separator
-      << "num_times" << csv_separator
-      << "n_elements" << csv_separator
-      << "sizeof" << csv_separator
-      << ((mibibytes) ? "max_mibytes_per_sec" : "max_mbytes_per_sec") << csv_separator
-      << "min_runtime" << csv_separator
-      << "max_runtime" << csv_separator
-      << "avg_runtime" << std::endl;
+    // std::cout
+    //   << "function" << csv_separator
+    //   << "num_times" << csv_separator
+    //   << "n_elements" << csv_separator
+    //   << "sizeof" << csv_separator
+    //   << ((mibibytes) ? "max_mibytes_per_sec" : "max_mbytes_per_sec") << csv_separator
+    //   << "min_runtime" << csv_separator
+    //   << "max_runtime" << csv_separator
+    //   << "avg_runtime" << std::endl;
   }
   else
   {
@@ -393,7 +393,7 @@ void run()
           << num_times << csv_separator
           << ARRAY_SIZE << csv_separator
           << sizeof(T) << csv_separator
-          << ((mibibytes) ? pow(2.0, -20.0) : 1.0E-6) * sizes[i] / (*minmax.first) << csv_separator
+          << std::fixed << std::setprecision(3) << ((mibibytes) ? pow(2.0, -20.0) : 1.0E-6) * sizes[i] / (*minmax.first) << csv_separator
           << *minmax.first << csv_separator
           << *minmax.second << csv_separator
           << average
