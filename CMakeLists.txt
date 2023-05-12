@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
 project(BabelStream VERSION 4.0 LANGUAGES CXX)
 
+set(CMAKE_CUDA_COMPILER /usr/local/cuda/bin/nvcc)
+set(CUDA_ARCH sm_80)
+
 # uncomment for debugging build issues:
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
